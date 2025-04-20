@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accident Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <style>
+        body, html { height: 100%; margin: 0; }
+        #map { height: 90vh; width: 100%; }
+        .header {
+            background: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+        .footer {
+            background: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+  
+<div class="header">🚗 Accident Tracker Map 🚧</div>
+<div id="map"></div>
+<div class="footer">Copyright &copy; tracker.com</div>
+
+<script>
+    var map = L.map('map').setView([22.0, 79.0], 5); // Centering on India
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    var accidentLocations = [
+        [28.6448, 77.2167, "Delhi - Outer Ring Road"],
+        [19.2183, 72.9781, "Mumbai - Eastern Express Highway"],
+        [12.9719, 77.6412, "Bangalore - Silk Board Junction"],
+        [13.0604, 80.2498, "Chennai - Mount Road, Guindy"],
+        [22.5726, 88.3639, "Kolkata - EM Bypass"],
+        [17.4375, 78.4483, "Hyderabad - Outer Ring Road"],
+        [26.9124, 75.7873, "Jaipur - Ajmer Road"],
+        [23.0225, 72.5714, "Ahmedabad - Sarkhej-Gandhinagar Highway"],
+        [26.8467, 80.9462, "Lucknow - Shaheed Path"],
+        [18.5204, 73.8567, "Pune - Mumbai-Pune Expressway"],
+        [25.3176, 82.9739, "Varanasi - Lahartara Road"],
+        [21.1458, 79.0882, "Nagpur - Wardha Road"],
+        [24.5854, 73.7125, "Udaipur - Pratap Nagar"],
+        [22.7196, 75.8577, "Indore - AB Road"],
+        [19.9975, 73.7898, "Nashik - Mumbai-Agra Highway"],
+        [34.0837, 74.7973, "Srinagar - Lal Chowk"],
+        [23.2599, 77.4126, "Bhopal - MP Nagar"],
+        [27.1767, 78.0081, "Agra - NH2 Road"],
+        [30.7333, 76.7794, "Chandigarh - Sector 17"],
+        [31.6339, 74.8723, "Amritsar - GT Road"],
+        [15.2993, 74.1240, "Goa - NH66"],
+        [29.0588, 76.0856, "Rohtak - NH9"],
+        [26.4499, 74.6399, "Ajmer - Kishangarh Road"]
+    ];
+
+    // Add markers
+    accidentLocations.forEach(function(loc) {
+        L.marker([loc[0], loc[1]])
+            .addTo(map)
+            .bindPopup("<b>Accident Zone</b><br>" + loc[2]);
+    });
+
+    // Heatmap Layer
+    var heatmapPoints = accidentLocations.map(loc => [loc[0], loc[1], 1.0]); // Adding intensity
+
+    var heat = L.heatLayer(heatmapPoints, {
+        radius: 25,
+        blur: 15,
+        maxZoom: 10
+    }).addTo(map);
+
+</script>
+
+</body>
+</html>
