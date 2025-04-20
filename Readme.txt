@@ -2,8 +2,8 @@ Steps for Code Execution:
 
 Step 1: Open the project folder.
 
-Step 2:  Step2.1 Run the final.ipynb file.
-         Step 2.2 In the address bar, type cmd and press Enter to open the Command Prompt.
+Step 2:  Step 2.1 Run the final.ipynb file.
+         Step 2.2 After that,In the address bar, type cmd and press Enter to open the Command Prompt.
 
 Step 3: In the Command Prompt, type python main.py to execute the main.py file.
 
